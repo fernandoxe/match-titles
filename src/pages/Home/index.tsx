@@ -7,6 +7,7 @@ import { Attempt, AttemptStatus, GameStatus } from '../../interfaces';
 import { AttemptList } from '../../components/AttemptList';
 import { Score } from '../../components/Score';
 import { Header } from '../../components/Header';
+import { useTranslation } from 'react-i18next';
 
 const data: string[] = albums.map((album: any) => album.tracks).flat();
 
@@ -33,6 +34,7 @@ const getAttempt = (attemptWord: string, attempts: Attempt[]): Attempt => {
 };
 
 export const Home = () => {
+  const { t } = useTranslation();
   const [attempts, setAttempts] = useState<Attempt[]>([]);
   const correctTimeout = useRef<NodeJS.Timeout>();
   const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.INITIAL);
@@ -86,7 +88,7 @@ export const Home = () => {
             className={`rounded-full h-32 aspect-square bg-[#542163] text-2xl font-bold text-neutral-300 shadow-lg shadow-black/40 hover:bg-opacity-80 active:animate-push`}
             onClick={handleStart}
           >
-            Play
+            {t('button.play')}
           </button>
         </div>
       }
@@ -95,7 +97,7 @@ export const Home = () => {
           <Countdown
             seconds={4}
             first
-            lastWord="Let's go bitch!"
+            lastWord={t('countdown.last_word')}
             onEnd={handleCountdownEnd}
           />
         </div>
@@ -135,10 +137,10 @@ export const Home = () => {
             onClick={handleStart}
           >
             <div>
-              Play
+              {t('button.play_again1')}
             </div>
             <div>
-              again
+              {t('button.play_again2')}
             </div>
           </button>
         </div>

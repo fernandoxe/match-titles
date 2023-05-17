@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ReactComponent as HelpIcon } from '../../icons/help_rounded.svg';
 import { ReactComponent as CancelIcon } from '../../icons/cancel_rounded.svg';
+import { useTranslation } from 'react-i18next';
 
 export const Header = () => {
+  const { t } = useTranslation();
   const [showHelp, setShowHelp] = useState<boolean>(!localStorage.getItem('firstHelp'));
 
   const handleClose = () => {
@@ -29,7 +31,9 @@ export const Header = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex gap-4">
-                <h2 className="grow text-xl font-bold mb-2">How to play</h2>
+                <h2 className="grow text-xl font-bold mb-2">
+                  {t('help.title')}
+                </h2>
                 <button
                   className="h-6 aspect-square hover:text-opacity-80 active:animate-push"
                   onClick={handleClose}
@@ -39,22 +43,19 @@ export const Header = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <div>
-                  Write a {process.env.REACT_APP_ARTIST} song title in the input field and press the send button or enter key
+                  {t('help.line1', {artist: process.env.REACT_APP_ARTIST})}
                 </div>
                 <div>
-                  Write another song title and repeat so many times you can before the timer ends
+                  {t('help.line2')}
                 </div>
                 <div>
-                  The case of the song title doesn't matter but all punctuation marks are required
+                  {t('help.line3')}
                 </div>
                 <div>
-                  You get 100 points per character for each correct song title
+                  {t('help.line4')}
                 </div>
                 <div>
-                  The wrong song titles gets 0 points
-                </div>
-                <div>
-                  The repeated song titles gets 0 points
+                  {t('help.line5')}
                 </div>
               </div>
             </div>

@@ -10,7 +10,7 @@ export interface CountdownProps {
   seconds: number;
   format?: boolean;
   first?: boolean;
-  lastWord?: string;
+  lastWord?: string | null;
   onEnd: () => void;
 };
 

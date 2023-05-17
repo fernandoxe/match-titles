@@ -3,6 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import { en, es } from './locales';
+
+const lng = navigator.language?.split('-')[0];
+
+i18next.use(initReactI18next).init({
+  lng,
+  fallbackLng: 'en',
+  resources: {
+    en,
+    es,
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Counter } from '../Counter';
+import { useTranslation } from 'react-i18next';
 
 interface ScoreProps {
   points: number;
@@ -8,6 +9,7 @@ interface ScoreProps {
 }
 
 export const Score = ({ points, songs, onEnd }: ScoreProps) => {
+  const { t } = useTranslation();
   const [showPoints, setShowPoints] = useState(false);
 
   return (
@@ -22,7 +24,7 @@ export const Score = ({ points, songs, onEnd }: ScoreProps) => {
           />
         </div>
         <div className="text-xs">
-          songs
+          {t('score.songs', {count: songs})}
         </div>
       </div>
       {showPoints &&
@@ -36,7 +38,7 @@ export const Score = ({ points, songs, onEnd }: ScoreProps) => {
             />
           </div>
           <div className="text-xs">
-            points
+            {t('score.points')}
           </div>
         </div>
       }
