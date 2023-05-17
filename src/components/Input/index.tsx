@@ -1,12 +1,14 @@
 import { useState, useRef, FormEvent } from 'react';
 import { ReactComponent as SendIcon } from '../../icons/send_rounded.svg';
+import { useTranslation } from 'react-i18next';
 
 interface InputProps {
   onSubmit: (value: string) => void;
 }
 
 export const Input = ({ onSubmit }: InputProps)=> {
-  const [inputValue, setInputValue] = useState("");
+  const { t } = useTranslation();
+  const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -23,7 +25,8 @@ export const Input = ({ onSubmit }: InputProps)=> {
     >
       <input  
         type="text"
-        className="grow rounded-lg py-2 px-4 bg-[#542163] text-neutral-300 outline-neutral-300"
+        placeholder={t('input.placeholder') || ''}
+        className="grow rounded-lg py-2 px-4 placeholder:italic placeholder:text-neutral-300/40 bg-[#542163] text-neutral-300 outline-neutral-300"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         ref={inputRef}

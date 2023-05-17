@@ -61,22 +61,18 @@ export const Home = () => {
   
   const handleCountdownEnd = useCallback(() => {
     setGameStatus(GameStatus.PLAYING);
-    console.log('first countdown ended');
   }, []);
 
   const handleEnd = useCallback((current?: number | null) => {
     setGameStatus(GameStatus.FINISHED);
-    console.log('countdown ended', current);
   }, []);
 
   const handlePointsEnd = useCallback(() => {
     setShowSongsList(true);
-    console.log('points ended');
   }, []);
 
   const handleEndList = useCallback(() => {
     setShowPlayAgain(true);
-    console.log('list ended');
   }, []);
 
   return (

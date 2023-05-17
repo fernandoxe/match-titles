@@ -15,11 +15,10 @@ export interface CountdownProps {
 };
 
 export const Countdown = ({seconds, format, first, lastWord, onEnd}: CountdownProps) => {
-  const [timeLeft, setTimeLeft] = useState(first ? 1 : seconds);
+  const [timeLeft, setTimeLeft] = useState(first ? 1 : seconds - 1);
   const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    console.log('countdown started', timeLeft, intervalRef.current);
     if (timeLeft === (first ? (seconds + 1) : -1)) {
       onEnd();
       return;
@@ -30,7 +29,6 @@ export const Countdown = ({seconds, format, first, lastWord, onEnd}: CountdownPr
     }, first ? 700 : 1000);
 
     return () => {
-      console.log('countdown ended', timeLeft, intervalRef.current);
       clearInterval(intervalRef.current);
     };
   }, [timeLeft, first, seconds, onEnd]);
