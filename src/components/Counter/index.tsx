@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export interface CounterProps {
   points: number;
@@ -9,19 +9,19 @@ export interface CounterProps {
 
 export const Counter = ({points, time, step, onEnd}: CounterProps) => {
   const [currentPoints, setCurrentPoints] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    console.log('Score useEffect');
-    const intervalId = setInterval(() => {
+    intervalRef.current = setInterval(() => {
       if (currentPoints >= points) {
-        clearInterval(intervalId);
+        clearInterval(intervalRef.current);
         onEnd();
       } else {
         setCurrentPoints((prevPoints) => prevPoints + step);
       }
     }, time / (points / step));
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalRef.current);
   }, [currentPoints, points, time, step, onEnd]);
 
   return (
