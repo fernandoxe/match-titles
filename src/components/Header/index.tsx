@@ -2,21 +2,26 @@ import { useState } from 'react';
 import { ReactComponent as HelpIcon } from '../../icons/help_rounded.svg';
 import { ReactComponent as CancelIcon } from '../../icons/cancel_rounded.svg';
 import { useTranslation } from 'react-i18next';
+import { openHelp } from '../../services/ga';
 
 export const Header = () => {
   const { t } = useTranslation();
-  const [showHelp, setShowHelp] = useState<boolean>(!localStorage.getItem('firstHelp'));
+  const [showHelp, setShowHelp] = useState<boolean>(false);
+
+  const handleOpen = () => {
+    setShowHelp(true);
+    openHelp();
+  };
 
   const handleClose = () => {
     setShowHelp(false);
-    localStorage.setItem('firstHelp', 'true');
   };
 
   return (
     <header className="flex items-center justify-end text-[#542163] z-[1]">
       <button
         className="h-6 aspect-square hover:text-opacity-80 active:animate-push"
-        onClick={() => setShowHelp(true)}
+        onClick={handleOpen}
       >
         <HelpIcon />
       </button>

@@ -22,3 +22,8 @@ export const sendWord = (word: string, status: AttemptStatus) => {
 export const playAgain = () => {
   event('Play again');
 };
+
+export const openHelp = () => {
+  event('Open help');
+};
+

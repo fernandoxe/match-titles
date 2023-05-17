@@ -20,8 +20,8 @@ export const en = {
 export const es = {
   translation: {
     'button.play': 'Jugar',
-    'button.play_again1': 'Jugar',
-    'button.play_again2': 'de nuevo',
+    'button.play_again1': 'Volver',
+    'button.play_again2': 'a jugar',
     'input.placeholder': 'canción',
     'score.songs_one': 'canción',
     'score.songs_other': 'canciones',
