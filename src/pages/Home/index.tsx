@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Input } from '../../components/Input';
 import { albums } from '../../data';
 import { Countdown } from '../../components/Countdown';
@@ -8,6 +8,7 @@ import { AttemptList } from '../../components/AttemptList';
 import { Score } from '../../components/Score';
 import { Header } from '../../components/Header';
 import { useTranslation } from 'react-i18next';
+import { endGame, playAgain, sendWord, startGame } from '../../services/ga';
 
 const data: string[] = albums.map((album: any) => album.tracks).flat();
 
@@ -36,15 +37,14 @@ const getAttempt = (attemptWord: string, attempts: Attempt[]): Attempt => {
 export const Home = () => {
   const { t } = useTranslation();
   const [attempts, setAttempts] = useState<Attempt[]>([]);
-  const correctTimeout = useRef<NodeJS.Timeout>();
   const [gameStatus, setGameStatus] = useState<GameStatus>(GameStatus.INITIAL);
   const [showSongsList, setShowSongsList] = useState<boolean>(false);
   const [showPlayAgain, setShowPlayAgain] = useState<boolean>(false);
 
   const handleSubmit = (word: string) => {
-    clearTimeout(correctTimeout.current);
     setAttempts((prev) => {
       const attempt = getAttempt(word, prev);
+      sendWord(attempt.word, attempt.status);
       return [
         ...prev,
         attempt,
@@ -52,19 +52,21 @@ export const Home = () => {
     });
   };
 
-  const handleStart = useCallback(() => {
+  const handleStart = useCallback((again?: boolean) => {
     setGameStatus(GameStatus.COUNTDOWN);
     setAttempts([]);
     setShowSongsList(false);
     setShowPlayAgain(false);
+    !again ? startGame() : playAgain();
   }, []);
   
   const handleCountdownEnd = useCallback(() => {
     setGameStatus(GameStatus.PLAYING);
   }, []);
 
-  const handleEnd = useCallback((current?: number | null) => {
+  const handleEnd = useCallback(() => {
     setGameStatus(GameStatus.FINISHED);
+    endGame();
   }, []);
 
   const handlePointsEnd = useCallback(() => {
@@ -82,7 +84,7 @@ export const Home = () => {
         <div className="absolute inset-0 flex items-center justify-center">
           <button
             className={`rounded-full h-32 aspect-square bg-[#542163] text-2xl font-bold text-neutral-300 shadow-lg shadow-black/40 hover:bg-opacity-80 active:animate-push`}
-            onClick={handleStart}
+            onClick={() => handleStart()}
           >
             {t('button.play')}
           </button>
@@ -116,7 +118,8 @@ export const Home = () => {
         <Score
           points={attempts.reduce((acc, attempt) => acc + attempt.points, 0)}
           songs={attempts.filter(attempt => attempt.status === AttemptStatus.CORRECT).length}
-          onEnd={handlePointsEnd} />
+          onEnd={handlePointsEnd}
+        />
       }
       {showSongsList &&
         <>
@@ -130,7 +133,7 @@ export const Home = () => {
         <div className="flex justify-center mt-12">
           <button
             className={`rounded-full h-32 aspect-square bg-[#542163] text-2xl font-bold text-neutral-300 shadow-lg shadow-black/40 hover:bg-opacity-80 active:animate-push`}
-            onClick={handleStart}
+            onClick={() => handleStart(true)}
           >
             <div>
               {t('button.play_again1')}
