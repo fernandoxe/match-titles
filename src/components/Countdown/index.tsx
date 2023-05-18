@@ -16,7 +16,7 @@ export interface CountdownProps {
 
 export const Countdown = ({seconds, format, first, lastWord, onEnd}: CountdownProps) => {
   const [timeLeft, setTimeLeft] = useState(first ? 1 : seconds - 1);
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
     if (timeLeft === (first ? (seconds + 1) : -1)) {
@@ -24,12 +24,12 @@ export const Countdown = ({seconds, format, first, lastWord, onEnd}: CountdownPr
       return;
     }
 
-    intervalRef.current = setInterval(() => {
+    timeoutRef.current = setTimeout(() => {
       setTimeLeft(prev => prev + (first ? 1 : -1));
     }, first ? 700 : 1000);
 
     return () => {
-      clearInterval(intervalRef.current);
+      clearTimeout(timeoutRef.current);
     };
   }, [timeLeft, first, seconds, onEnd]);
 
