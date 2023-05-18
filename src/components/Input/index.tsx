@@ -37,7 +37,7 @@ export const Input = ({ onSubmit }: InputProps)=> {
         autoFocus
       />
       <button
-        className="rounded-lg text-xs h-10 p-2 aspect-square bg-[#542163] leading-none text-neutral-300 shadow-lg shadow-black/40 hover:bg-opacity-80 active:animate-push disabled:bg-opacity-50 disabled:animate-none"
+        className={`rounded-lg text-xs h-10 p-2 aspect-square bg-[#542163] leading-none text-neutral-300 ${inputValue.trim() ? 'shadow-lg shadow-black/40' : ''} hover:bg-opacity-80 active:animate-push disabled:bg-opacity-50 disabled:animate-none`}
         disabled={!inputValue.trim()}
       >
         <SendIcon />
