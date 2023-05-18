@@ -46,12 +46,15 @@ export const Header = () => {
                   <CancelIcon />
                 </button>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 text-sm">
                 <div>
                   {t('help.line1', {artist: process.env.REACT_APP_ARTIST})}
                 </div>
                 <div>
                   {t('help.line2')}
+                </div>
+                <div>
+                  {t('help.line_extra')}
                 </div>
                 <div>
                   {t('help.line3')}
