@@ -1,9 +1,11 @@
+import { COUNTDOWN_LAST_WORD } from "../config";
+
 export const en = {
   translation: {
     'button.play': 'Play',
     'button.play_again1': 'Play',
     'button.play_again2': 'again',
-    'countdown.last_word': 'Let\'s go bitch!',
+    'countdown.last_word': COUNTDOWN_LAST_WORD.en,
     'input.placeholder': 'song',
     'score.songs_one': 'song',
     'score.songs_other': 'songs',
@@ -23,6 +25,7 @@ export const es = {
     'button.play_again1': 'Volver',
     'button.play_again2': 'a jugar',
     'input.placeholder': 'canción',
+    'countdown.last_word': COUNTDOWN_LAST_WORD.es,
     'score.songs_one': 'canción',
     'score.songs_other': 'canciones',
     'score.points': 'puntos',
