@@ -10,7 +10,7 @@ export interface ModalProps {
 export const Modal = ({title, children, onClose}: ModalProps) => {
   return (
     <div
-      className="fixed inset-0 px-8 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 px-8 flex items-center justify-center bg-black/60"
       onClick={onClose}
     >
       <div className="w-96 max-h-[calc(100vh-4rem)] rounded-lg overflow-scroll">
