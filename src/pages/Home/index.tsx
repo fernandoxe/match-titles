@@ -3,7 +3,7 @@ import { Input } from '../../components/Input';
 import { albums } from '../../data';
 import { Countdown } from '../../components/Countdown';
 import { CHAR_BASE_POINTS, GAME_TIMER } from '../../config';
-import { Attempt, AttemptStatus, GameStatus } from '../../interfaces';
+import { Attempt, AttemptStatus, GameStatus, HighScore } from '../../interfaces';
 import { AttemptList } from '../../components/AttemptList';
 import { Score } from '../../components/Score';
 import { Header } from '../../components/Header';
@@ -66,8 +66,23 @@ export const Home = () => {
 
   const handleEnd = useCallback(() => {
     setGameStatus(GameStatus.FINISHED);
+    const points = attempts.reduce((acc, attempt) => acc + attempt.points, 0);
+    const correct = attempts.filter(attempt => attempt.status === AttemptStatus.CORRECT).length;
+    const highScores = localStorage.getItem('highScores') || '{}';
+    const highScoresParsed: HighScore = JSON.parse(highScores);
+    const isBestGame = points >= (highScoresParsed.bestPoints || 0);
+    const newHighscores = {
+      ...highScoresParsed,
+      maxCorrect: Math.max(highScoresParsed.maxCorrect || 0, correct),
+      totalGames: (highScoresParsed.totalGames || 0) + 1,
+    };
+    if(isBestGame) {
+      newHighscores.bestPoints = points;
+      newHighscores.bestSongs = correct;
+    }
+    localStorage.setItem('highScores', JSON.stringify(newHighscores));
     endGame();
-  }, []);
+  }, [attempts]);
 
   const handlePointsEnd = useCallback(() => {
     setShowSongsList(true);

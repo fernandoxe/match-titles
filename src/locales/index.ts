@@ -17,6 +17,12 @@ export const en = {
     'help.line4': 'You earn 100 points for each character of each correct song',
     'help.line5': 'Incorrect and repeated songs don\'t earn points',
     'help.line_extra': HELP_EXTRA.en,
+    'high_scores.title': 'High scores',
+    'high_scores.no_scores': 'Play to see your high scores',
+    'high_scores.best_game': 'Best game',
+    'high_scores.max_points': 'Best points',
+    'high_scores.max_songs': 'Best songs',
+    'high_scores.total_games': 'Total games',
   },
 };
 
@@ -37,5 +43,11 @@ export const es = {
     'help.line4': 'Ganas 100 puntos por cada caracter de cada canción correcta',
     'help.line5': 'Las canciones incorrectas y repetidas no suman puntos',
     'help.line_extra': HELP_EXTRA.es,
+    'high_scores.title': 'Mejores puntuaciones',
+    'high_scores.no_scores': 'Juega para ver tus mejores puntuaciones',
+    'high_scores.best_game': 'Mejor partida',
+    'high_scores.max_points': 'Mejor puntuación',
+    'high_scores.max_songs': 'Mejor cantidad de canciones',
+    'high_scores.total_games': 'Total de partidas',
   },
 };

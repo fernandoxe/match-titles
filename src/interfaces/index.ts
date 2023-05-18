@@ -18,3 +18,10 @@ export interface Attempt {
   status: AttemptStatus;
   points: number;
 };
+
+export interface HighScore {
+  bestPoints: number;
+  bestSongs: number;
+  maxCorrect: number;
+  totalGames: number;
+};
