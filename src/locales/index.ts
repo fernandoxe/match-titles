@@ -10,7 +10,7 @@ export const en = {
     'score.songs_one': 'song',
     'score.songs_other': 'songs',
     'score.points': 'points',
-    'help.title': 'How to Play',
+    'help.title': 'How to play',
     'help.line1': 'Type a {{artist}}\'s song title and press the submit button or the enter key',
     'help.line2': 'Do the same as many times as you can',
     'help.line3': 'Capitalization is not necessary but all punctuation marks are',
